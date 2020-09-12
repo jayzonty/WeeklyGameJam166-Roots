@@ -41,6 +41,9 @@ namespace WGJRoots
 
         public LevelData(uint width = 256, uint height = 64)
         {
+            Width = width;
+            Height = height;
+
             cells = new Cell[width, height];
 
             // For now, initialize the whole level data in the constructor.
@@ -54,6 +57,17 @@ namespace WGJRoots
                     cells[x, y].cellType = Cell.CellType.Soil;
                 }
             }
+        }
+
+        public Cell GetCellAt(uint x, uint y)
+        {
+            if (((0 <= x) && (x < Width))
+                && ((0 <= y) && (y < Height)))
+            {
+                return cells[x, y];
+            }
+
+            return null;
         }
     }
 }
