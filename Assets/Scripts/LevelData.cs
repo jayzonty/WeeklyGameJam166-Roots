@@ -6,25 +6,6 @@ namespace WGJRoots
 {
     public class LevelData
     {
-        public class Cell
-        {
-            public enum CellType
-            {
-                Soil,
-
-                RootBranch,
-                RootBranchTip,
-
-                // Nutrients
-                Nutrient,
-
-                // Obstacles
-                Obstacle
-            }
-
-            public CellType cellType = CellType.Soil;
-        }
-
         public uint Width
         {
             get;
@@ -53,8 +34,7 @@ namespace WGJRoots
             {
                 for (uint y = 0; y < height; ++y)
                 {
-                    cells[x, y] = new Cell();
-                    cells[x, y].cellType = Cell.CellType.Soil;
+                    cells[x, y] = new SoilCell();
                 }
             }
         }

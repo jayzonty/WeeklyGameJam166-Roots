@@ -11,7 +11,7 @@ namespace WGJRoots
         [System.Serializable]
         public class TileMapping
         {
-            public LevelData.Cell.CellType cellType = LevelData.Cell.CellType.Soil;
+            public Cell.CellType cellType = Cell.CellType.Soil;
             public Tile tile;
         }
 
@@ -40,10 +40,10 @@ namespace WGJRoots
             {
                 for (uint y = 0; y < Data.Height; ++y)
                 {
-                    LevelData.Cell cell = Data.GetCellAt(x, y);
+                    Cell cell = Data.GetCellAt(x, y);
                     if (cell != null)
                     {
-                        TileMapping tileMapping = tileMappings.FirstOrDefault((t) => t.cellType == cell.cellType);
+                        TileMapping tileMapping = tileMappings.FirstOrDefault((t) => t.cellType == cell.Type);
                         if (tileMapping != null)
                         {
                             tileMap.SetTile(new Vector3Int((int)x, (int)y, 0), tileMapping.tile);
