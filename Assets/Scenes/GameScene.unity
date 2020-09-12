@@ -155,6 +155,8 @@ MonoBehaviour:
   tileMappings:
   - cellType: 0
     tile: {fileID: 11400000, guid: 05d960b8647645c4bb1477be54e4a5ad, type: 2}
+  - cellType: 1
+    tile: {fileID: 11400000, guid: 23662f612339dd14b981d6cd22286746, type: 2}
   tileMap: {fileID: 1293137474}
 --- !u!4 &115045305
 Transform:
