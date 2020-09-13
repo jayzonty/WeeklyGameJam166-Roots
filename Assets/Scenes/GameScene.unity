@@ -167,6 +167,14 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 04a4881950f740642befcba880a675b3, type: 2}
   - cellType: 6
     tile: {fileID: 11400000, guid: ee9f417d7f632d745a8c19257856e619, type: 2}
+  - cellType: 7
+    tile: {fileID: 11400000, guid: 689704f2718d9c7488a09e5d7d0429d9, type: 2}
+  - cellType: 8
+    tile: {fileID: 11400000, guid: cc54fa13db98f1f4080b9cd904626e9e, type: 2}
+  - cellType: 9
+    tile: {fileID: 11400000, guid: 5cf3f8fbbb545f942ba2bfde7640ae40, type: 2}
+  - cellType: 10
+    tile: {fileID: 11400000, guid: bfcb7119ad2fc9a46b0a1f251c532299, type: 2}
   tileMap: {fileID: 1293137474}
 --- !u!4 &115045305
 Transform:
