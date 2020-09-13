@@ -17,7 +17,8 @@ namespace WGJRoots
 
         public List<TileMapping> tileMappings;
 
-        public Tilemap tileMap;
+        public Tilemap backgroundTilemap;
+        public Tilemap foregroundTilemap;
 
         public LevelData Data
         {
@@ -64,7 +65,14 @@ namespace WGJRoots
                         TileMapping tileMapping = tileMappings.FirstOrDefault((t) => t.cellType == cell.Type);
                         if (tileMapping != null)
                         {
-                            tileMap.SetTile(new Vector3Int(x, y, 0), tileMapping.tile);
+                            if (tileMapping.cellType == Cell.CellType.Soil)
+                            {
+                                backgroundTilemap.SetTile(new Vector3Int(x, y, 0), tileMapping.tile);
+                            }
+                            else
+                            {
+                                foregroundTilemap.SetTile(new Vector3Int(x, y, 0), tileMapping.tile);
+                            }
                         }
                     }
                 }
