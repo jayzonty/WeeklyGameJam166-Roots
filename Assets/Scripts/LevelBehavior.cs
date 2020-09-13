@@ -51,7 +51,7 @@ namespace WGJRoots
             RefreshTileMap();
 
             // Move camera to above soil, center of the soil grid
-            Vector3 initialCameraPosition = tileMap.CellToWorld(new Vector3Int((int)(Data.Width / 2 - 1), (int)(Data.Height - 1), 0));
+            Vector3 initialCameraPosition = tileMap.CellToWorld(new Vector3Int((Data.Width / 2 - 1), (Data.Height - 1), 0));
             initialCameraPosition.z = -10.0f;
             Camera.main.transform.position = initialCameraPosition;
         }
@@ -59,9 +59,9 @@ namespace WGJRoots
         public void RefreshTileMap()
         {
             // TODO: Implement
-            for (uint x = 0; x < Data.Width; ++x)
+            for (int x = 0; x < Data.Width; ++x)
             {
-                for (uint y = 0; y < Data.Height; ++y)
+                for (int y = 0; y < Data.Height; ++y)
                 {
                     Cell cell = Data.GetCellAt(x, y);
                     if (cell != null)
@@ -69,7 +69,7 @@ namespace WGJRoots
                         TileMapping tileMapping = tileMappings.FirstOrDefault((t) => t.cellType == cell.Type);
                         if (tileMapping != null)
                         {
-                            tileMap.SetTile(new Vector3Int((int)x, (int)y, 0), tileMapping.tile);
+                            tileMap.SetTile(new Vector3Int(x, y, 0), tileMapping.tile);
                         }
                     }
                 }

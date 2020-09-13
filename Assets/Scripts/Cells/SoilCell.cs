@@ -10,5 +10,10 @@ namespace WGJRoots
                 return CellType.Soil;
             }
         }
+
+        public SoilCell(int x, int y)
+            : base(x, y)
+        {
+        }
     }
 }

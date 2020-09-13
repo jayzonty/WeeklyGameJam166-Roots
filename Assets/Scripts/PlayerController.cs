@@ -10,6 +10,8 @@ namespace WGJRoots
         public Tilemap levelTileMap;
         public LevelBehavior levelBehavior;
 
+        private int selectedRootBranchIndex = 0;
+
         private void Update()
         {
             if (Input.GetMouseButtonUp(0))
@@ -20,7 +22,7 @@ namespace WGJRoots
 
                 Vector3Int cellPosition = levelTileMap.WorldToCell(mouseWorldPosition);
 
-                levelBehavior.Data.SetCellAt((uint)cellPosition.x, (uint)cellPosition.y, new RootBranchCell());
+                levelBehavior.Data.SetCellAt(cellPosition.x, cellPosition.y, new RootBranchCell(cellPosition.x, cellPosition.y, selectedRootBranchIndex));
             }
         }
     }

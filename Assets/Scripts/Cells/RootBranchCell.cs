@@ -14,5 +14,19 @@ namespace WGJRoots
                 return CellType.RootBranchVertical;
             }
         }
+
+        public int Index
+        {
+            get;
+            private set;
+        }
+
+        private List<RootBranchCell> children = new List<RootBranchCell>();
+
+        public RootBranchCell(int x, int y, int index)
+            : base(x, y)
+        {
+            Index = index;
+        }
     }
 }
