@@ -40,6 +40,16 @@ namespace WGJRoots
                     cells[x, y] = new SoilCell(x, y);
                 }
             }
+
+            Cell seedCell = cells[width / 2 - 1, height - 1];
+            
+            RootBranchCell leftRootBranch = new RootBranchCell(seedCell.X - 1, seedCell.Y, 0);
+            leftRootBranch.SetParent(seedCell);
+            cells[leftRootBranch.X, leftRootBranch.Y] = leftRootBranch;
+
+            RootBranchCell rightRootBranch = new RootBranchCell(seedCell.X + 1, seedCell.Y, 1);
+            rightRootBranch.SetParent(seedCell);
+            cells[rightRootBranch.X, rightRootBranch.Y] = rightRootBranch;
         }
 
         public Cell GetCellAt(int x, int y)

@@ -10,16 +10,16 @@ namespace WGJRoots
         {
             Soil,
 
-            RootBranchVertical,
-            RootBranchHorizontal,
+            RootBranchUpDown,
+            RootBranchLeftRight,
             RootBranchUpLeft,
             RootBranchUpRight,
             RootBranchDownLeft,
             RootBranchDownRight,
-            RootBranchTipUp,
-            RootBranchTipDown,
-            RootBranchTipLeft,
-            RootBranchTipRight,
+            RootBranchUp,
+            RootBranchDown,
+            RootBranchLeft,
+            RootBranchRight,
 
             // Nutrients
             Nutrient,
