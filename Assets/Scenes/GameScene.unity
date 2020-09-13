@@ -158,7 +158,7 @@ MonoBehaviour:
   - cellType: 1
     tile: {fileID: 11400000, guid: 23662f612339dd14b981d6cd22286746, type: 2}
   - cellType: 2
-    tile: {fileID: 11400000, guid: 23662f612339dd14b981d6cd22286746, type: 2}
+    tile: {fileID: 11400000, guid: 85af8505ebc2baf45a6dbaf73e5595c4, type: 2}
   - cellType: 3
     tile: {fileID: 11400000, guid: c6e5e610c6e8fac42af39015b7fef5df, type: 2}
   - cellType: 4
