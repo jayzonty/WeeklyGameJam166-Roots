@@ -25,11 +25,29 @@ namespace WGJRoots
             set;
         }
 
-        private void Start()
+        private void Awake()
         {
             // Put initialization of the level data here for now.
             Data = new LevelData();
+        }
 
+        private void OnEnable()
+        {
+            Data.OnLevelDataChanged += LevelData_OnLevelDataChanged;
+        }
+
+        private void LevelData_OnLevelDataChanged(List<Vector3Int> changedCellsPositions)
+        {
+            RefreshTileMap();
+        }
+
+        private void OnDisable()
+        {
+            Data.OnLevelDataChanged -= LevelData_OnLevelDataChanged;
+        }
+
+        private void Start()
+        {
             RefreshTileMap();
 
             // Move camera to above soil, center of the soil grid

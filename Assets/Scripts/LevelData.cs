@@ -1,11 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace WGJRoots
 {
     public class LevelData
     {
+        public delegate void LevelDataChanged(List<Vector3Int> changedCellsPositions);
+        public event LevelDataChanged OnLevelDataChanged;
+
         public uint Width
         {
             get;
@@ -48,6 +51,19 @@ namespace WGJRoots
             }
 
             return null;
+        }
+
+        public void SetCellAt(uint x, uint y, Cell cell)
+        {
+            if (((0 <= x) && (x < Width))
+                && ((0 <= y) && (y < Height)))
+            {
+                cells[x, y] = cell;
+
+                List<Vector3Int> changedCellsPositions = new List<Vector3Int>();
+                changedCellsPositions.Add(new Vector3Int((int)x, (int)y, 0));
+                OnLevelDataChanged?.Invoke(changedCellsPositions);
+            }
         }
     }
 }
