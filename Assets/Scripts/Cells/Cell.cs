@@ -25,7 +25,9 @@ namespace WGJRoots
             Nutrient,
 
             // Obstacles
-            Obstacle
+            Obstacle,
+
+            Empty
         }
 
         public abstract CellType Type

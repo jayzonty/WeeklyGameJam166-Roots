@@ -19,7 +19,7 @@ namespace WGJRoots
             {
                 for (int y = 0; y < levelBehavior.Data.Height; ++y)
                 {
-                    Cell cell = levelBehavior.Data.GetCellAt(x, y);
+                    Cell cell = levelBehavior.Data.GetForegroundCellAt(x, y);
                     if (cell is RootBranchCell)
                     {
                         RootBranchCell rootBranchCell = cell as RootBranchCell;
@@ -48,7 +48,7 @@ namespace WGJRoots
                 rootBranchTipCells[selectedRootBranchIndex].AddChild(newRootBranch);
                 rootBranchTipCells[selectedRootBranchIndex] = newRootBranch;
 
-                levelBehavior.Data.SetCellAt(cellPosition.x, cellPosition.y, newRootBranch);
+                levelBehavior.Data.SetForegroundCellAt(cellPosition.x, cellPosition.y, newRootBranch);
             }
 
             if (Input.GetKeyUp(KeyCode.Q))

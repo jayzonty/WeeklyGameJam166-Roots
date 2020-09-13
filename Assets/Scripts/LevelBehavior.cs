@@ -59,20 +59,23 @@ namespace WGJRoots
             {
                 for (int y = 0; y < Data.Height; ++y)
                 {
-                    Cell cell = Data.GetCellAt(x, y);
-                    if (cell != null)
+                    Cell foregroundCell = Data.GetForegroundCellAt(x, y);
+                    if (foregroundCell != null)
                     {
-                        TileMapping tileMapping = tileMappings.FirstOrDefault((t) => t.cellType == cell.Type);
+                        TileMapping tileMapping = tileMappings.FirstOrDefault((t) => t.cellType == foregroundCell.Type);
                         if (tileMapping != null)
                         {
-                            if (tileMapping.cellType == Cell.CellType.Soil)
-                            {
-                                backgroundTilemap.SetTile(new Vector3Int(x, y, 0), tileMapping.tile);
-                            }
-                            else
-                            {
-                                foregroundTilemap.SetTile(new Vector3Int(x, y, 0), tileMapping.tile);
-                            }
+                            foregroundTilemap.SetTile(new Vector3Int(x, y, 0), tileMapping.tile);
+                        }
+                    }
+
+                    Cell backgroundCell = Data.GetBackgroundCellAt(x, y);
+                    if (backgroundCell != null)
+                    {
+                        TileMapping tileMapping = tileMappings.FirstOrDefault((t) => t.cellType == backgroundCell.Type);
+                        if (tileMapping != null)
+                        {
+                            backgroundTilemap.SetTile(new Vector3Int(x, y, 0), tileMapping.tile);
                         }
                     }
                 }

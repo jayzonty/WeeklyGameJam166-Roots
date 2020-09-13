@@ -21,14 +21,16 @@ namespace WGJRoots
             private set;
         }
 
-        private Cell[,] cells;
+        private Cell[,] backgroundCells;
+        private Cell[,] foregroundCells;
 
         public LevelData(int width = 256, int height = 64)
         {
             Width = width;
             Height = height;
 
-            cells = new Cell[width, height];
+            backgroundCells = new Cell[width, height];
+            foregroundCells = new Cell[width, height];
 
             // For now, initialize the whole level data in the constructor.
             // Might want to make this asynchronous in the future.
@@ -37,38 +39,64 @@ namespace WGJRoots
             {
                 for (int y = 0; y < height; ++y)
                 {
-                    cells[x, y] = new SoilCell(x, y);
+                    backgroundCells[x, y] = new SoilCell(x, y);
+                    foregroundCells[x, y] = new EmptyCell(x, y);
                 }
             }
 
-            Cell seedCell = cells[width / 2 - 1, height - 1];
+            Cell seedCell = new EmptyCell(width / 2 - 1, height - 1);
+            foregroundCells[seedCell.X, seedCell.Y] = seedCell;
             
             RootBranchCell leftRootBranch = new RootBranchCell(seedCell.X - 1, seedCell.Y, 0);
             leftRootBranch.SetParent(seedCell);
-            cells[leftRootBranch.X, leftRootBranch.Y] = leftRootBranch;
+            foregroundCells[leftRootBranch.X, leftRootBranch.Y] = leftRootBranch;
 
             RootBranchCell rightRootBranch = new RootBranchCell(seedCell.X + 1, seedCell.Y, 1);
             rightRootBranch.SetParent(seedCell);
-            cells[rightRootBranch.X, rightRootBranch.Y] = rightRootBranch;
+            foregroundCells[rightRootBranch.X, rightRootBranch.Y] = rightRootBranch;
         }
 
-        public Cell GetCellAt(int x, int y)
+        public Cell GetForegroundCellAt(int x, int y)
         {
             if (((0 <= x) && (x < Width))
                 && ((0 <= y) && (y < Height)))
             {
-                return cells[x, y];
+                return foregroundCells[x, y];
             }
 
             return null;
         }
 
-        public void SetCellAt(int x, int y, Cell cell)
+        public void SetForegroundCellAt(int x, int y, Cell cell)
         {
             if (((0 <= x) && (x < Width))
                 && ((0 <= y) && (y < Height)))
             {
-                cells[x, y] = cell;
+                foregroundCells[x, y] = cell;
+
+                List<Vector3Int> changedCellsPositions = new List<Vector3Int>();
+                changedCellsPositions.Add(new Vector3Int(x, y, 0));
+                OnLevelDataChanged?.Invoke(changedCellsPositions);
+            }
+        }
+
+        public Cell GetBackgroundCellAt(int x, int y)
+        {
+            if (((0 <= x) && (x < Width))
+                && ((0 <= y) && (y < Height)))
+            {
+                return backgroundCells[x, y];
+            }
+
+            return null;
+        }
+
+        public void SetBackgroundCellAt(int x, int y, Cell cell)
+        {
+            if (((0 <= x) && (x < Width))
+                && ((0 <= y) && (y < Height)))
+            {
+                backgroundCells[x, y] = cell;
 
                 List<Vector3Int> changedCellsPositions = new List<Vector3Int>();
                 changedCellsPositions.Add(new Vector3Int(x, y, 0));
