@@ -31,6 +31,11 @@ namespace WGJRoots
             Data = new LevelData();
 
             RefreshTileMap();
+
+            // Move camera to above soil, center of the soil grid
+            Vector3 initialCameraPosition = tileMap.CellToWorld(new Vector3Int((int)(Data.Width / 2 - 1), (int)(Data.Height - 1), 0));
+            initialCameraPosition.z = -10.0f;
+            Camera.main.transform.position = initialCameraPosition;
         }
 
         public void RefreshTileMap()
