@@ -61,7 +61,7 @@ namespace WGJRoots
                             {
                                 NutrientCell nutrientCell = clickedCell as NutrientCell;
 
-                                gameState.nutrientPoints += nutrientCell.NutrientValue;
+                                gameState.NutrientPoints += nutrientCell.NutrientValue;
                                 gameState.BranchPoints += nutrientCell.BranchPointValue;
                             }
 

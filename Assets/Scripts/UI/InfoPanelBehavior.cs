@@ -22,7 +22,7 @@ namespace WGJRoots
 
             if (nutrientPointsText != null)
             {
-                nutrientPointsText.text = "Nutrient Points: " + gameState.nutrientPoints + "/" + gameState.nutrientPointsToNextGrowthLevel;
+                nutrientPointsText.text = "Nutrient Points: " + gameState.NutrientPoints + "/" + gameState.NutrientPointsToNextGrowthLevel;
             }
 
             if (branchPointsText != null)

@@ -8,11 +8,36 @@ namespace WGJRoots
     public class GameState : MonoBehaviour
     {
         public UnityEvent onGameOver;
+        public UnityEvent<int> onGrowthLevelIncreased;
 
-        public int growthLevel;
+        public int growthLevel = 0;
 
-        public int nutrientPoints;
-        public int nutrientPointsToNextGrowthLevel;
+        public int NutrientPoints
+        {
+            get
+            {
+                return nutrientPoints;
+            }
+
+            set
+            {
+                nutrientPoints = value;
+                if (nutrientPoints >= NutrientPointsToNextGrowthLevel)
+                {
+                    nutrientPoints -= NutrientPointsToNextGrowthLevel;
+                    ++growthLevel;
+                    NutrientPointsToNextGrowthLevel = CalculateRequiredNutrientPointsToNextLevel(growthLevel);
+
+                    onGrowthLevelIncreased?.Invoke(growthLevel);
+                }
+            }
+        }
+
+        public int NutrientPointsToNextGrowthLevel
+        {
+            get;
+            private set;
+        }
 
         public int initialBranchPoints = 10;
 
@@ -45,8 +70,17 @@ namespace WGJRoots
         private void Start()
         {
             branchPoints = initialBranchPoints;
+
+            NutrientPointsToNextGrowthLevel = CalculateRequiredNutrientPointsToNextLevel(growthLevel);
         }
 
+        private int nutrientPoints = 0;
         private int branchPoints = 0;
+
+        private int CalculateRequiredNutrientPointsToNextLevel(int currentGrowthLevel)
+        {
+            // y = x^2 + 4
+            return currentGrowthLevel * currentGrowthLevel + 4;
+        }
     }
 }
