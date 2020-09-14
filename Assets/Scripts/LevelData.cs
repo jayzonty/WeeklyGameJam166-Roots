@@ -40,6 +40,7 @@ namespace WGJRoots
                 for (int y = 0; y < height; ++y)
                 {
                     backgroundCells[x, y] = new SoilCell(x, y);
+                    backgroundCells[x, y].IsHidden = false;
 
                     if (y < height - 3)
                     {
@@ -56,14 +57,17 @@ namespace WGJRoots
             }
 
             Cell seedCell = new EmptyCell(width / 2 - 1, height - 1);
+            seedCell.IsHidden = false;
             foregroundCells[seedCell.X, seedCell.Y] = seedCell;
             
             RootBranchCell leftRootBranch = new RootBranchCell(seedCell.X - 1, seedCell.Y, 0);
             leftRootBranch.SetParent(seedCell);
+            leftRootBranch.IsHidden = false;
             foregroundCells[leftRootBranch.X, leftRootBranch.Y] = leftRootBranch;
 
             RootBranchCell rightRootBranch = new RootBranchCell(seedCell.X + 1, seedCell.Y, 1);
             rightRootBranch.SetParent(seedCell);
+            rightRootBranch.IsHidden = false;
             foregroundCells[rightRootBranch.X, rightRootBranch.Y] = rightRootBranch;
         }
 

@@ -62,10 +62,17 @@ namespace WGJRoots
                     Cell foregroundCell = Data.GetForegroundCellAt(x, y);
                     if (foregroundCell != null)
                     {
-                        TileMapping tileMapping = tileMappings.FirstOrDefault((t) => t.cellType == foregroundCell.Type);
-                        if (tileMapping != null)
+                        if (!foregroundCell.IsHidden)
                         {
-                            foregroundTilemap.SetTile(new Vector3Int(x, y, 0), tileMapping.tile);
+                            TileMapping tileMapping = tileMappings.FirstOrDefault((t) => t.cellType == foregroundCell.Type);
+                            if (tileMapping != null)
+                            {
+                                foregroundTilemap.SetTile(new Vector3Int(x, y, 0), tileMapping.tile);
+                            }
+                        }
+                        else
+                        {
+                            foregroundTilemap.SetTile(new Vector3Int(x, y, 0), null);
                         }
                     }
 

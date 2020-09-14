@@ -47,6 +47,12 @@ namespace WGJRoots
             private set;
         }
 
+        public bool IsHidden
+        {
+            get;
+            set;
+        } = true;
+
         public Cell(int x, int y)
         {
             X = x;
