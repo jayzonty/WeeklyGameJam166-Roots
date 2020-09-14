@@ -40,7 +40,18 @@ namespace WGJRoots
                 for (int y = 0; y < height; ++y)
                 {
                     backgroundCells[x, y] = new SoilCell(x, y);
-                    foregroundCells[x, y] = new EmptyCell(x, y);
+
+                    if (y < height - 3)
+                    {
+                        float nutrientRoll = Random.Range(0.0f, 1.0f);
+                        if (nutrientRoll < 0.5f)
+                        {
+                            NutrientCell nutrientCell = new NutrientCell(x, y);
+                            nutrientCell.NutrientValue = 2;
+                            nutrientCell.BranchPointValue = 2;
+                            foregroundCells[x, y] = nutrientCell;
+                        }
+                    }
                 }
             }
 

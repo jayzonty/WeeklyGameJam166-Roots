@@ -9,6 +9,7 @@ namespace WGJRoots
     {
         public Tilemap levelTileMap;
         public LevelBehavior levelBehavior;
+        public GameState gameState;
 
         private int selectedRootBranchIndex = 0;
         private List<RootBranchCell> rootBranchTipCells = new List<RootBranchCell>();
@@ -43,12 +44,34 @@ namespace WGJRoots
 
                 Vector3Int cellPosition = levelTileMap.WorldToCell(mouseWorldPosition);
 
-                RootBranchCell newRootBranch = new RootBranchCell(cellPosition.x, cellPosition.y, selectedRootBranchIndex);
-                newRootBranch.SetParent(rootBranchTipCells[selectedRootBranchIndex]);
-                rootBranchTipCells[selectedRootBranchIndex].AddChild(newRootBranch);
-                rootBranchTipCells[selectedRootBranchIndex] = newRootBranch;
+                Cell clickedCell = levelBehavior.Data.GetForegroundCellAt(cellPosition.x, cellPosition.y);
+                if (clickedCell != null)
+                {
+                    if (clickedCell.Type == Cell.CellType.Nutrient)
+                    {
+                        NutrientCell nutrientCell = clickedCell as NutrientCell;
 
-                levelBehavior.Data.SetForegroundCellAt(cellPosition.x, cellPosition.y, newRootBranch);
+                        gameState.nutrientPoints += nutrientCell.NutrientValue;
+
+                        Debug.Log("Got nutrient cell. New nutrient level: " + gameState.nutrientPoints);
+
+                        RootBranchCell newRootBranch = new RootBranchCell(cellPosition.x, cellPosition.y, selectedRootBranchIndex);
+                        newRootBranch.SetParent(rootBranchTipCells[selectedRootBranchIndex]);
+                        rootBranchTipCells[selectedRootBranchIndex].AddChild(newRootBranch);
+                        rootBranchTipCells[selectedRootBranchIndex] = newRootBranch;
+
+                        levelBehavior.Data.SetForegroundCellAt(cellPosition.x, cellPosition.y, newRootBranch);
+                    }
+                }
+                else
+                {
+                    RootBranchCell newRootBranch = new RootBranchCell(cellPosition.x, cellPosition.y, selectedRootBranchIndex);
+                    newRootBranch.SetParent(rootBranchTipCells[selectedRootBranchIndex]);
+                    rootBranchTipCells[selectedRootBranchIndex].AddChild(newRootBranch);
+                    rootBranchTipCells[selectedRootBranchIndex] = newRootBranch;
+
+                    levelBehavior.Data.SetForegroundCellAt(cellPosition.x, cellPosition.y, newRootBranch);
+                }
             }
 
             if (Input.GetKeyUp(KeyCode.Q))

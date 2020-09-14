@@ -175,6 +175,8 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 5cf3f8fbbb545f942ba2bfde7640ae40, type: 2}
   - cellType: 10
     tile: {fileID: 11400000, guid: bfcb7119ad2fc9a46b0a1f251c532299, type: 2}
+  - cellType: 11
+    tile: {fileID: 11400000, guid: 8871a68e140a53d45b5837e657314f9b, type: 2}
   backgroundTilemap: {fileID: 1293137474}
   foregroundTilemap: {fileID: 2009145581}
 --- !u!4 &115045305
@@ -514,6 +516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelTileMap: {fileID: 1293137474}
   levelBehavior: {fileID: 115045304}
+  gameState: {fileID: 1204225193}
 --- !u!4 &1549439456
 Transform:
   m_ObjectHideFlags: 0
