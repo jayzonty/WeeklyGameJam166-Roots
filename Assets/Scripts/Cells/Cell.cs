@@ -53,6 +53,14 @@ namespace WGJRoots
             set;
         } = true;
 
+        public virtual int BranchCost
+        {
+            get
+            {
+                return 1;
+            }
+        }
+
         public Cell(int x, int y)
         {
             X = x;

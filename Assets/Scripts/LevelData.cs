@@ -52,6 +52,18 @@ namespace WGJRoots
                             nutrientCell.BranchPointValue = 2;
                             foregroundCells[x, y] = nutrientCell;
                         }
+                        else
+                        {
+                            EmptyCell emptyCell = new EmptyCell(x, y);
+                            emptyCell.IsHidden = false;
+                            foregroundCells[x, y] = emptyCell;
+                        }
+                    }
+                    else
+                    {
+                        EmptyCell emptyCell = new EmptyCell(x, y);
+                        emptyCell.IsHidden = false;
+                        foregroundCells[x, y] = emptyCell;
                     }
                 }
             }

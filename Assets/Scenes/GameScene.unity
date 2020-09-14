@@ -367,6 +367,7 @@ MonoBehaviour:
   growthLevel: 0
   nutrientPoints: 0
   nutrientPointsToNextGrowthLevel: 0
+  branchPoints: 10
 --- !u!1 &1293137471
 GameObject:
   m_ObjectHideFlags: 0
