@@ -42,36 +42,49 @@ namespace WGJRoots
                 Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
                 mouseWorldPosition.z = 0.0f;
 
-                Vector3Int cellPosition = levelTileMap.WorldToCell(mouseWorldPosition);
-
-                Cell clickedCell = levelBehavior.Data.GetForegroundCellAt(cellPosition.x, cellPosition.y);
-                if (clickedCell != null)
+                Vector3Int clickedCellPosition = levelTileMap.WorldToCell(mouseWorldPosition);
+                
+                List<Vector3Int> clickableCellLocations = GetClickableCellLocations();
+                if (clickableCellLocations.Contains(clickedCellPosition))
                 {
-                    if (clickedCell.Type == Cell.CellType.Nutrient)
+                    Cell clickedCell = levelBehavior.Data.GetForegroundCellAt(clickedCellPosition.x, clickedCellPosition.y);
+                    if (clickedCell != null)
                     {
-                        NutrientCell nutrientCell = clickedCell as NutrientCell;
+                        if (clickedCell.Type == Cell.CellType.Nutrient)
+                        {
+                            NutrientCell nutrientCell = clickedCell as NutrientCell;
 
-                        gameState.nutrientPoints += nutrientCell.NutrientValue;
+                            gameState.nutrientPoints += nutrientCell.NutrientValue;
 
-                        Debug.Log("Got nutrient cell. New nutrient level: " + gameState.nutrientPoints);
+                            Debug.Log("Got nutrient cell. New nutrient level: " + gameState.nutrientPoints);
 
-                        RootBranchCell newRootBranch = new RootBranchCell(cellPosition.x, cellPosition.y, selectedRootBranchIndex);
+                            RootBranchCell newRootBranch = new RootBranchCell(clickedCellPosition.x, clickedCellPosition.y, selectedRootBranchIndex);
+                            newRootBranch.SetParent(rootBranchTipCells[selectedRootBranchIndex]);
+                            newRootBranch.IsHidden = false;
+                            rootBranchTipCells[selectedRootBranchIndex].AddChild(newRootBranch);
+                            rootBranchTipCells[selectedRootBranchIndex] = newRootBranch;
+
+                            levelBehavior.Data.SetForegroundCellAt(clickedCellPosition.x, clickedCellPosition.y, newRootBranch);
+                        }
+                    }
+                    else
+                    {
+                        RootBranchCell newRootBranch = new RootBranchCell(clickedCellPosition.x, clickedCellPosition.y, selectedRootBranchIndex);
                         newRootBranch.SetParent(rootBranchTipCells[selectedRootBranchIndex]);
+                        newRootBranch.IsHidden = false;
                         rootBranchTipCells[selectedRootBranchIndex].AddChild(newRootBranch);
                         rootBranchTipCells[selectedRootBranchIndex] = newRootBranch;
 
-                        levelBehavior.Data.SetForegroundCellAt(cellPosition.x, cellPosition.y, newRootBranch);
+                        levelBehavior.Data.SetForegroundCellAt(clickedCellPosition.x, clickedCellPosition.y, newRootBranch);
                     }
-                }
-                else
-                {
-                    RootBranchCell newRootBranch = new RootBranchCell(cellPosition.x, cellPosition.y, selectedRootBranchIndex);
-                    newRootBranch.SetParent(rootBranchTipCells[selectedRootBranchIndex]);
-                    rootBranchTipCells[selectedRootBranchIndex].AddChild(newRootBranch);
-                    rootBranchTipCells[selectedRootBranchIndex] = newRootBranch;
 
-                    levelBehavior.Data.SetForegroundCellAt(cellPosition.x, cellPosition.y, newRootBranch);
-                }
+                    levelBehavior.Data.SetForegroundCellHidden(clickedCellPosition.x - 1, clickedCellPosition.y, false);
+                    levelBehavior.Data.SetForegroundCellHidden(clickedCellPosition.x + 1, clickedCellPosition.y, false);
+                    levelBehavior.Data.SetForegroundCellHidden(clickedCellPosition.x, clickedCellPosition.y - 1, false);
+                    levelBehavior.Data.SetForegroundCellHidden(clickedCellPosition.x, clickedCellPosition.y + 1, false);
+
+                    levelBehavior.RefreshTileMap();
+                }   
             }
 
             if (Input.GetKeyUp(KeyCode.Q))
@@ -91,6 +104,19 @@ namespace WGJRoots
             Vector3 cameraPos = levelTileMap.CellToWorld(new Vector3Int(rootBranchTipCells[selectedRootBranchIndex].X, rootBranchTipCells[selectedRootBranchIndex].Y, 0)) + levelTileMap.tileAnchor;
             cameraPos.z = -10.0f;
             Camera.main.transform.position = cameraPos;
+        }
+
+        private List<Vector3Int> GetClickableCellLocations()
+        {
+            List<Vector3Int> ret = new List<Vector3Int>();
+            foreach (RootBranchCell rootBranchTip in rootBranchTipCells)
+            {
+                ret.Add(new Vector3Int(rootBranchTip.X - 1, rootBranchTip.Y, 0));
+                ret.Add(new Vector3Int(rootBranchTip.X + 1, rootBranchTip.Y, 0));
+                ret.Add(new Vector3Int(rootBranchTip.X, rootBranchTip.Y - 1, 0));
+                ret.Add(new Vector3Int(rootBranchTip.X, rootBranchTip.Y + 1, 0));
+            }
+            return ret;
         }
     }
 }

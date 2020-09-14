@@ -65,10 +65,18 @@ namespace WGJRoots
             leftRootBranch.IsHidden = false;
             foregroundCells[leftRootBranch.X, leftRootBranch.Y] = leftRootBranch;
 
+            SetForegroundCellHidden(leftRootBranch.X - 1, leftRootBranch.Y, false);
+            SetForegroundCellHidden(leftRootBranch.X, leftRootBranch.Y - 1, false);
+            SetForegroundCellHidden(leftRootBranch.X, leftRootBranch.Y + 1, false);
+
             RootBranchCell rightRootBranch = new RootBranchCell(seedCell.X + 1, seedCell.Y, 1);
             rightRootBranch.SetParent(seedCell);
             rightRootBranch.IsHidden = false;
             foregroundCells[rightRootBranch.X, rightRootBranch.Y] = rightRootBranch;
+
+            SetForegroundCellHidden(rightRootBranch.X + 1, rightRootBranch.Y, false);
+            SetForegroundCellHidden(rightRootBranch.X, rightRootBranch.Y - 1, false);
+            SetForegroundCellHidden(rightRootBranch.X, rightRootBranch.Y + 1, false);
         }
 
         public Cell GetForegroundCellAt(int x, int y)
@@ -116,6 +124,18 @@ namespace WGJRoots
                 List<Vector3Int> changedCellsPositions = new List<Vector3Int>();
                 changedCellsPositions.Add(new Vector3Int(x, y, 0));
                 OnLevelDataChanged?.Invoke(changedCellsPositions);
+            }
+        }
+
+        public void SetForegroundCellHidden(int x, int y, bool isHidden)
+        {
+            if (((0 <= x) && (x < Width))
+                && ((0 <= y) && (y < Height)))
+            {
+                if (foregroundCells[x, y] != null)
+                {
+                    foregroundCells[x, y].IsHidden = isHidden;
+                }
             }
         }
     }
