@@ -201,5 +201,16 @@ namespace WGJRoots
                 OnLevelDataChanged?.Invoke(changedCellsPositions);
             }
         }
+
+        public bool IsForegroundCellDiggable(int x, int y)
+        {
+            if (((0 <= x) && (x < Width))
+                && ((0 <= y) && (y < Height)))
+            {
+                return foregroundCells[x, y].IsDiggable;
+            }
+
+            return false;
+        }
     }
 }

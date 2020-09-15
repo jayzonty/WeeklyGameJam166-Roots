@@ -67,6 +67,12 @@ namespace WGJRoots
             }
         }
 
+        public void GameOver()
+        {
+            IsGameOver = true;
+            onGameOver?.Invoke();
+        }
+
         private void Start()
         {
             branchPoints = initialBranchPoints;

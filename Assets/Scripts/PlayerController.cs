@@ -101,9 +101,12 @@ namespace WGJRoots
                         levelBehavior.Data.SetCellsHidden(newRootBranch.X, newRootBranch.Y - 1, false);
                         levelBehavior.Data.SetCellsHidden(newRootBranch.X, newRootBranch.Y + 1, false);
 
-                        //levelBehavior.RefreshTileMap();
-
                         CenterCameraToSelectedRootBranch();
+
+                        if (!HasValidMoves())
+                        {
+                            gameState.GameOver();
+                        }
                     }
                 }
             }
@@ -145,6 +148,24 @@ namespace WGJRoots
             Vector3 cameraPos = levelTileMap.CellToWorld(new Vector3Int(rootBranchTipCells[selectedRootBranchIndex].X, rootBranchTipCells[selectedRootBranchIndex].Y, 0)) + levelTileMap.tileAnchor;
             cameraPos.z = -10.0f;
             Camera.main.transform.position = cameraPos;
+        }
+
+        private bool HasValidMoves()
+        {
+            for (int i = 0; i < rootBranchTipCells.Count; ++i)
+            {
+                Cell cell = rootBranchTipCells[i];
+
+                if (levelBehavior.Data.IsForegroundCellDiggable(cell.X - 1, cell.Y)
+                    || levelBehavior.Data.IsForegroundCellDiggable(cell.X + 1, cell.Y)
+                    || levelBehavior.Data.IsForegroundCellDiggable(cell.X, cell.Y - 1)
+                    || levelBehavior.Data.IsForegroundCellDiggable(cell.X, cell.Y + 1))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

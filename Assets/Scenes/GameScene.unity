@@ -690,7 +690,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthLevel: 0
-  initialBranchPoints: 10
+  initialBranchPoints: 9999
 --- !u!1 &1292443984
 GameObject:
   m_ObjectHideFlags: 0
