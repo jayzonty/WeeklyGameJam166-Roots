@@ -79,7 +79,7 @@ namespace WGJRoots
             SetCellsHidden(leftRootBranch.X, leftRootBranch.Y - 1, false);
             SetCellsHidden(leftRootBranch.X, leftRootBranch.Y + 1, false);
 
-            RootBranchCell rightRootBranch = new RootBranchCell(seedCell.X + 1, seedCell.Y, 1);
+            RootBranchCell rightRootBranch = new RootBranchCell(seedCell.X + 1, seedCell.Y, 2);
             rightRootBranch.SetParent(seedCell);
             rightRootBranch.IsHidden = false;
             foregroundCells[rightRootBranch.X, rightRootBranch.Y] = rightRootBranch;
@@ -88,6 +88,16 @@ namespace WGJRoots
             SetCellsHidden(rightRootBranch.X + 1, rightRootBranch.Y, false);
             SetCellsHidden(rightRootBranch.X, rightRootBranch.Y - 1, false);
             SetCellsHidden(rightRootBranch.X, rightRootBranch.Y + 1, false);
+
+            RootBranchCell bottomRootBranch = new RootBranchCell(seedCell.X, seedCell.Y - 1, 1);
+            bottomRootBranch.SetParent(seedCell);
+            bottomRootBranch.IsHidden = false;
+            foregroundCells[bottomRootBranch.X, bottomRootBranch.Y] = bottomRootBranch;
+            SetBackgroundCellHidden(bottomRootBranch.X, bottomRootBranch.Y, false);
+
+            SetCellsHidden(bottomRootBranch.X - 1, bottomRootBranch.Y, false);
+            SetCellsHidden(bottomRootBranch.X + 1, bottomRootBranch.Y, false);
+            SetCellsHidden(bottomRootBranch.X, bottomRootBranch.Y - 1, false);
         }
 
         public Cell GetForegroundCellAt(int x, int y)
