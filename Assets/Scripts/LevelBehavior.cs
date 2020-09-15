@@ -26,6 +26,14 @@ namespace WGJRoots
             set;
         }
 
+        public Vector3 TreeStartingPoint
+        {
+            get
+            {
+                return backgroundTilemap.CellToWorld(new Vector3Int(Data.Width / 2 - 1, Data.Height - 1, 0)) + backgroundTilemap.tileAnchor;
+            }
+        }
+
         private void Awake()
         {
             // Put initialization of the level data here for now.
