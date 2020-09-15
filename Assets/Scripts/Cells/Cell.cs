@@ -27,6 +27,8 @@ namespace WGJRoots
             // Obstacles
             Obstacle,
 
+            SoilHidden,
+
             Empty
         }
 

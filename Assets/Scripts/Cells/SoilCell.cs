@@ -7,7 +7,14 @@ namespace WGJRoots
         {
             get
             {
-                return CellType.Soil;
+                if (IsHidden)
+                {
+                    return CellType.SoilHidden;
+                }
+                else
+                {
+                    return CellType.Soil;
+                }
             }
         }
 

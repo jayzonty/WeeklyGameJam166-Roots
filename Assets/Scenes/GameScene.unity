@@ -245,6 +245,8 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 8871a68e140a53d45b5837e657314f9b, type: 2}
   - cellType: 12
     tile: {fileID: 11400000, guid: ec493d1f394e52e4f8d8e75d355e407b, type: 2}
+  - cellType: 13
+    tile: {fileID: 11400000, guid: 8aaa906c896e37f40a8d2236b6e3f5b7, type: 2}
   backgroundTilemap: {fileID: 1293137474}
   foregroundTilemap: {fileID: 2009145581}
 --- !u!4 &115045305

@@ -94,13 +94,14 @@ namespace WGJRoots
                         rootBranchTipCells[selectedRootBranchIndex] = newRootBranch;
 
                         levelBehavior.Data.SetForegroundCellAt(newRootBranch.X, newRootBranch.Y, newRootBranch);
+                        levelBehavior.Data.SetBackgroundCellHidden(newRootBranch.X, newRootBranch.Y, false);
 
-                        levelBehavior.Data.SetForegroundCellHidden(newRootBranch.X - 1, newRootBranch.Y, false);
-                        levelBehavior.Data.SetForegroundCellHidden(newRootBranch.X + 1, newRootBranch.Y, false);
-                        levelBehavior.Data.SetForegroundCellHidden(newRootBranch.X, newRootBranch.Y - 1, false);
-                        levelBehavior.Data.SetForegroundCellHidden(newRootBranch.X, newRootBranch.Y + 1, false);
+                        levelBehavior.Data.SetCellsHidden(newRootBranch.X - 1, newRootBranch.Y, false);
+                        levelBehavior.Data.SetCellsHidden(newRootBranch.X + 1, newRootBranch.Y, false);
+                        levelBehavior.Data.SetCellsHidden(newRootBranch.X, newRootBranch.Y - 1, false);
+                        levelBehavior.Data.SetCellsHidden(newRootBranch.X, newRootBranch.Y + 1, false);
 
-                        levelBehavior.RefreshTileMap();
+                        //levelBehavior.RefreshTileMap();
 
                         CenterCameraToSelectedRootBranch();
                     }
