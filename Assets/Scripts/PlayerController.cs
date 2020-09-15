@@ -73,7 +73,7 @@ namespace WGJRoots
                 RootBranchCell currentRootBranchCell = rootBranchTipCells[selectedRootBranchIndex];
                 Cell targetCell = levelBehavior.Data.GetForegroundCellAt(currentRootBranchCell.X + dx, currentRootBranchCell.Y + dy);
                 if ((targetCell != null) 
-                    && !(targetCell is RootBranchCell))
+                    && targetCell.IsDiggable)
                 {
                     if (gameState.BranchPoints >= targetCell.BranchCost)
                     {

@@ -55,6 +55,12 @@ namespace WGJRoots
             set;
         } = true;
 
+        public bool IsDiggable
+        {
+            get;
+            set;
+        } = true;
+
         public virtual int BranchCost
         {
             get;

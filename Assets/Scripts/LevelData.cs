@@ -66,6 +66,7 @@ namespace WGJRoots
 
             Cell seedCell = new EmptyCell(width / 2 - 1, height - 1);
             seedCell.IsHidden = false;
+            seedCell.IsDiggable = false;
             foregroundCells[seedCell.X, seedCell.Y] = seedCell;
             SetBackgroundCellHidden(seedCell.X, seedCell.Y, false);
             

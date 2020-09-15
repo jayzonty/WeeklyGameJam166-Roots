@@ -102,6 +102,8 @@ namespace WGJRoots
             : base(x, y)
         {
             Index = index;
+
+            IsDiggable = false;
         }
 
         public void AddChild(RootBranchCell rootBranchCell)
