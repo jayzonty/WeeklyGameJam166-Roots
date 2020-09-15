@@ -11,8 +11,14 @@ namespace WGJRoots
         public LevelBehavior levelBehavior;
         public GameState gameState;
 
+        public float defaultOrthoSize = 5.0f;
+        public float minOrthoSize = 4.0f;
+        public float maxOrthoSize = 8.0f;
+
         private int selectedRootBranchIndex = 0;
         private List<RootBranchCell> rootBranchTipCells = new List<RootBranchCell>();
+
+        private Vector3 prevMousePosition;
 
         private void Start()
         {
@@ -32,6 +38,9 @@ namespace WGJRoots
             rootBranchTipCells.Sort((a, b) => a.Index.CompareTo(b.Index));
 
             CenterCameraToSelectedRootBranch();
+            Camera.main.orthographicSize = defaultOrthoSize;
+
+            prevMousePosition = Input.mousePosition;
         }
 
         private void Update()
@@ -108,6 +117,26 @@ namespace WGJRoots
                 selectedRootBranchIndex = (selectedRootBranchIndex + 1) % rootBranchTipCells.Count;
                 CenterCameraToSelectedRootBranch();
             }
+
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                CenterCameraToSelectedRootBranch();
+            }
+        }
+
+        private void LateUpdate()
+        {
+            if (Input.GetMouseButton(0))
+            {
+                Vector3 prevMouseWorldPos = Camera.main.ScreenToWorldPoint(prevMousePosition);
+                Vector3 currentMouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector3 mousePosDelta = currentMouseWorldPos - prevMouseWorldPos;
+                Camera.main.transform.position -= mousePosDelta;
+            }
+
+            Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - Input.mouseScrollDelta.y, minOrthoSize, maxOrthoSize);
+
+            prevMousePosition = Input.mousePosition;
         }
 
         private void CenterCameraToSelectedRootBranch()

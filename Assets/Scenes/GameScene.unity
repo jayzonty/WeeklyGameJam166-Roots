@@ -686,7 +686,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthLevel: 0
-  initialBranchPoints: 10
+  initialBranchPoints: 9999
 --- !u!1 &1292443984
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,6 +962,9 @@ MonoBehaviour:
   levelTileMap: {fileID: 1293137474}
   levelBehavior: {fileID: 115045304}
   gameState: {fileID: 1204225193}
+  defaultOrthoSize: 8
+  minOrthoSize: 5
+  maxOrthoSize: 8
 --- !u!4 &1549439456
 Transform:
   m_ObjectHideFlags: 0
