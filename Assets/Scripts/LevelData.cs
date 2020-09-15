@@ -42,22 +42,18 @@ namespace WGJRoots
                     backgroundCells[x, y] = new SoilCell(x, y);
                     backgroundCells[x, y].IsHidden = false;
 
-                    if (y < height - 3)
+                    float tileTypeRoll = Random.Range(0.0f, 1.0f);
+                    if (tileTypeRoll <= 0.2f)
                     {
-                        float nutrientRoll = Random.Range(0.0f, 1.0f);
-                        if (nutrientRoll < 0.5f)
-                        {
-                            NutrientCell nutrientCell = new NutrientCell(x, y);
-                            nutrientCell.NutrientValue = 2;
-                            nutrientCell.BranchPointValue = 2;
-                            foregroundCells[x, y] = nutrientCell;
-                        }
-                        else
-                        {
-                            EmptyCell emptyCell = new EmptyCell(x, y);
-                            emptyCell.IsHidden = false;
-                            foregroundCells[x, y] = emptyCell;
-                        }
+                        ObstacleCell obstacleCell = new ObstacleCell(x, y);
+                        foregroundCells[x, y] = obstacleCell;
+                    }
+                    else if (tileTypeRoll <= 0.4f)
+                    {
+                        NutrientCell nutrientCell = new NutrientCell(x, y);
+                        nutrientCell.NutrientValue = 2;
+                        nutrientCell.BranchPointValue = 2;
+                        foregroundCells[x, y] = nutrientCell;
                     }
                     else
                     {

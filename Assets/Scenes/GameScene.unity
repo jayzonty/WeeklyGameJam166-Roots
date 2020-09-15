@@ -243,6 +243,8 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: bfcb7119ad2fc9a46b0a1f251c532299, type: 2}
   - cellType: 11
     tile: {fileID: 11400000, guid: 8871a68e140a53d45b5837e657314f9b, type: 2}
+  - cellType: 12
+    tile: {fileID: 11400000, guid: ec493d1f394e52e4f8d8e75d355e407b, type: 2}
   backgroundTilemap: {fileID: 1293137474}
   foregroundTilemap: {fileID: 2009145581}
 --- !u!4 &115045305
@@ -686,7 +688,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthLevel: 0
-  initialBranchPoints: 9999
+  initialBranchPoints: 10
 --- !u!1 &1292443984
 GameObject:
   m_ObjectHideFlags: 0

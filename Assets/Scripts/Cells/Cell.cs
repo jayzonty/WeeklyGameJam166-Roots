@@ -55,11 +55,9 @@ namespace WGJRoots
 
         public virtual int BranchCost
         {
-            get
-            {
-                return 1;
-            }
-        }
+            get;
+            set;
+        } = 1;
 
         public Cell(int x, int y)
         {
