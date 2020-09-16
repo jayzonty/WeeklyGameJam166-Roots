@@ -52,7 +52,7 @@ namespace WGJRoots
 
         private void LevelData_OnLevelDataChanged(List<Vector3Int> changedCellsPositions)
         {
-            RefreshTileMap();
+            RefreshTileMap(changedCellsPositions);
         }
 
         private void OnDisable()
@@ -101,6 +101,42 @@ namespace WGJRoots
                         {
                             backgroundTilemap.SetTile(new Vector3Int(x, y, 0), tileMapping.tile);
                         }
+                    }
+                }
+            }
+        }
+
+        public void RefreshTileMap(List<Vector3Int> changedCellsPositions)
+        {
+            foreach (Vector3Int cellPos in changedCellsPositions)
+            {
+                int x = cellPos.x;
+                int y = cellPos.y;
+
+                Cell foregroundCell = Data.GetForegroundCellAt(x, y);
+                if (foregroundCell != null)
+                {
+                    if (!foregroundCell.IsHidden)
+                    {
+                        TileMapping tileMapping = tileMappings.FirstOrDefault((t) => t.cellType == foregroundCell.Type);
+                        if (tileMapping != null)
+                        {
+                            foregroundTilemap.SetTile(new Vector3Int(x, y, 0), tileMapping.tile);
+                        }
+                    }
+                    else
+                    {
+                        foregroundTilemap.SetTile(new Vector3Int(x, y, 0), null);
+                    }
+                }
+
+                Cell backgroundCell = Data.GetBackgroundCellAt(x, y);
+                if (backgroundCell != null)
+                {
+                    TileMapping tileMapping = tileMappings.FirstOrDefault((t) => t.cellType == backgroundCell.Type);
+                    if (tileMapping != null)
+                    {
+                        backgroundTilemap.SetTile(new Vector3Int(x, y, 0), tileMapping.tile);
                     }
                 }
             }
