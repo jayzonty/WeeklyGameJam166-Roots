@@ -69,6 +69,11 @@ namespace WGJRoots
 
         public void GameOver()
         {
+            if (IsGameOver)
+            {
+                return;
+            }
+
             IsGameOver = true;
             onGameOver?.Invoke();
         }

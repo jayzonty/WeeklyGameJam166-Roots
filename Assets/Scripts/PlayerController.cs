@@ -75,38 +75,35 @@ namespace WGJRoots
                 if ((targetCell != null) 
                     && targetCell.IsDiggable)
                 {
-                    if (gameState.BranchPoints >= targetCell.BranchCost)
+                    if (targetCell.Type == Cell.CellType.Nutrient)
                     {
-                        if (targetCell.Type == Cell.CellType.Nutrient)
-                        {
-                            NutrientCell nutrientCell = targetCell as NutrientCell;
+                        NutrientCell nutrientCell = targetCell as NutrientCell;
 
-                            gameState.NutrientPoints += nutrientCell.NutrientValue;
-                            gameState.BranchPoints += nutrientCell.BranchPointValue;
-                        }
+                        gameState.NutrientPoints += nutrientCell.NutrientValue;
+                        gameState.BranchPoints += nutrientCell.BranchPointValue;
+                    }
 
-                        gameState.BranchPoints -= targetCell.BranchCost;
+                    gameState.BranchPoints = Mathf.Max(gameState.BranchPoints - targetCell.BranchCost, 0);
 
-                        RootBranchCell newRootBranch = new RootBranchCell(targetCell.X, targetCell.Y, selectedRootBranchIndex);
-                        newRootBranch.SetParent(rootBranchTipCells[selectedRootBranchIndex]);
-                        newRootBranch.IsHidden = false;
-                        rootBranchTipCells[selectedRootBranchIndex].AddChild(newRootBranch);
-                        rootBranchTipCells[selectedRootBranchIndex] = newRootBranch;
+                    RootBranchCell newRootBranch = new RootBranchCell(targetCell.X, targetCell.Y, selectedRootBranchIndex);
+                    newRootBranch.SetParent(rootBranchTipCells[selectedRootBranchIndex]);
+                    newRootBranch.IsHidden = false;
+                    rootBranchTipCells[selectedRootBranchIndex].AddChild(newRootBranch);
+                    rootBranchTipCells[selectedRootBranchIndex] = newRootBranch;
 
-                        levelBehavior.Data.SetForegroundCellAt(newRootBranch.X, newRootBranch.Y, newRootBranch);
-                        levelBehavior.Data.SetBackgroundCellHidden(newRootBranch.X, newRootBranch.Y, false);
+                    levelBehavior.Data.SetForegroundCellAt(newRootBranch.X, newRootBranch.Y, newRootBranch);
+                    levelBehavior.Data.SetBackgroundCellHidden(newRootBranch.X, newRootBranch.Y, false);
 
-                        levelBehavior.Data.SetCellsHidden(newRootBranch.X - 1, newRootBranch.Y, false);
-                        levelBehavior.Data.SetCellsHidden(newRootBranch.X + 1, newRootBranch.Y, false);
-                        levelBehavior.Data.SetCellsHidden(newRootBranch.X, newRootBranch.Y - 1, false);
-                        levelBehavior.Data.SetCellsHidden(newRootBranch.X, newRootBranch.Y + 1, false);
+                    levelBehavior.Data.SetCellsHidden(newRootBranch.X - 1, newRootBranch.Y, false);
+                    levelBehavior.Data.SetCellsHidden(newRootBranch.X + 1, newRootBranch.Y, false);
+                    levelBehavior.Data.SetCellsHidden(newRootBranch.X, newRootBranch.Y - 1, false);
+                    levelBehavior.Data.SetCellsHidden(newRootBranch.X, newRootBranch.Y + 1, false);
 
-                        CenterCameraToSelectedRootBranch();
+                    CenterCameraToSelectedRootBranch();
 
-                        if (!HasValidMoves())
-                        {
-                            gameState.GameOver();
-                        }
+                    if (!HasValidMoves())
+                    {
+                        gameState.GameOver();
                     }
                 }
             }
