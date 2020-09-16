@@ -20,6 +20,9 @@ namespace WGJRoots
         public Tilemap backgroundTilemap;
         public Tilemap foregroundTilemap;
 
+        public GameState gameState;
+        public GameOverPanelBehavior gameOverPanel;
+
         public LevelData Data
         {
             get;
@@ -43,6 +46,8 @@ namespace WGJRoots
         private void OnEnable()
         {
             Data.OnLevelDataChanged += LevelData_OnLevelDataChanged;
+
+            gameState.onGameOver.AddListener(HandleGameOver);
         }
 
         private void LevelData_OnLevelDataChanged(List<Vector3Int> changedCellsPositions)
@@ -53,11 +58,15 @@ namespace WGJRoots
         private void OnDisable()
         {
             Data.OnLevelDataChanged -= LevelData_OnLevelDataChanged;
+
+            gameState.onGameOver.RemoveListener(HandleGameOver);
         }
 
         private void Start()
         {
             RefreshTileMap();
+
+            gameOverPanel.gameObject.SetActive(false);
         }
 
         public void RefreshTileMap()
@@ -95,6 +104,12 @@ namespace WGJRoots
                     }
                 }
             }
+        }
+
+        private void HandleGameOver()
+        {
+            gameOverPanel.gameObject.SetActive(true);
+            gameOverPanel.RefreshText();
         }
     }
 }
