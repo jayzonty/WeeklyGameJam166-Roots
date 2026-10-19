@@ -1,7 +1,7 @@
 # WeeklyGameJam166-Roots
 [英語版 (English)](./README.md)
 
-![Cover image](./RawAssets/Screenshots/Screenshot1.png)
+![Cover image](./RawAssets/Screenshots/Screenshot1.PNG)
 
 このゲームでは、木の根を誘導して土の中の栄養を集めることで、木を成長させていきます。<br/>
 土の中を進むには「成長ポイント」が1つ必要になりますが、これは栄養を集めることで回復できます。<br/>

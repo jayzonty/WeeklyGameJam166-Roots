@@ -1,7 +1,7 @@
 # WeeklyGameJam166-Roots
 [Japanese (日本語版)](./README.ja-JP.md)
 
-![Cover image](./RawAssets/Screenshots/Screenshot1.png)
+![Cover image](./RawAssets/Screenshots/Screenshot1.PNG)
  
 In this game, you make your tree grow by guiding your tree's roots to gather nutrients in the soil.<br/>
 Navigating through the soil requires 1 branching point, which can be recovered as you collect nutrients.<br/>
